@@ -115,10 +115,10 @@ $ cat << EOF > payload-workspace.json
   "data": {
     "attributes": {
       "name": "new-workspace",
-      "terraform_version": "0.12.6",
+      "terraform_version": "1.8.5",
       "working-directory": "",
       "vcs-repo": {
-        "identifier": "${GITHUB_USERNAME}/tf-handson-workshop",
+        "identifier": "${GITHUB_USERNAME}/terraform-workshop-jp",
         "oauth-token-id": "${OAUTH_TOKEN_ID}",
         "branch": "",
         "default-branch": true
@@ -133,11 +133,11 @@ $ curl \
   --header "Authorization: Bearer $TF_TOKEN" \
   --header "Content-Type: application/vnd.api+json" \
   --request POST \
-  --data @payload.json \
+  --data @payload-workspace.json \
   https://app.terraform.io/api/v2/organizations/${TF_ORG}/workspaces | jq
 ```
 
-`organizations/ORG_ID/workspaces`を実行し、一つワークスペースが作成されました。再度一覧を見てみましょう。一つワークスペースが作成されているはずです。ここで出力される`.data.id`の`ws-********`の値はワークスペースの ID です後で利用するのでメモしておいてください。
+`organizations/${TF_ORG}/workspaces` を実行し、ワークスペースが作成されたことを確認します。ここで出力される `.data.id` の `ws-********` がワークスペース ID です。後で使うためメモしておいてください。
 
 ```shell
 $ export WS_ID=<YOUR_WORKSPACE_ID>
@@ -154,7 +154,7 @@ new-workspace
 handson-workshop
 ```
 
-ワークスペースの情報を確認して VCS の連携の設定などが正しく反映されているか確認してください。`organizations/${TF_ORG}/workspaces/<WS_NAME>`がエンドポイントです。
+ワークスペースの情報を確認して、VCS 連携の設定などが正しく反映されているか確認してください。`organizations/${TF_ORG}/workspaces/new-workspace` がエンドポイントです。
 
 ```shell
 $ curl \
@@ -175,12 +175,12 @@ $ curl \
   --header "Authorization: Bearer $TF_TOKEN" \
   --header "Content-Type: application/vnd.api+json" \
   --request GET \
-  https://app.terraform.io/api/v2/vars\?filter%5Borganization%5D%5Bname%5D\=${TF_ORG}\&filter%5Bworkspace%5D%5Bname%5D\=handson-workshop | jq
+  https://app.terraform.io/api/v2/vars\?filter%5Borganization%5D%5Bname%5D\=${TF_ORG}\&filter%5Bworkspace%5D%5Bname%5D\=new-workspace | jq
 ```
 
 セットしたインスタンス数の値が見れる一方、`sensitive`としてセットした AWS のキーなどは`null`と表示されるでしょう。
 
-それでは変数をセットしていきます。JSON で変数をセットするために必要なパラメータは[こちら](https://www.terraform.io/docs/cloud/api/variables.html)を参照してください。まずは`hello_tf_instance_count`です。
+それでは変数をセットしていきます。JSON で変数を設定する際に必要なパラメータは [Variables API](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/variables) を参照してください。まずは `hello_tf_instance_count` です。
 
 ```shell
 $ cat << EOF > payload-var.json
@@ -262,7 +262,7 @@ $ curl \
 
 残りの変数をセットしていきますが、現在 TFE API ではデータのリスト型をサポートしていないため一つ一つファイルを定義していく必要があります。
 
-ここでは API とは関係ありませんが、ここでは Terraform の`Terraform Enterprise Provider`を使ってバルクでセットしてみます。Terraform Enterprise Provider については[こちら](https://www.terraform.io/docs/providers/tfe/index.html)を参照して下さい。
+ここでは API とは別手段として、Terraform の `tfe` Provider を使って変数をまとめて設定してみます。`tfe` Provider については [Terraform Registry](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs) を参照してください。
 
 残りの`aws_access_key`, `aws_secret_key`, `ami`, `region`, `confirm_destroy`をまとめてセットしていきます。
 
@@ -468,12 +468,12 @@ $ curl \
 `plan-details.json`の内容を確認してください。ここから`log-read-url`のファイルを取得し、プランの変更内容を確認します。
 
 ```shell
-wget $(cat plan-details.json | jq -r '.data.attributes."log-read-url"'
+wget "$(cat plan-details.json | jq -r '.data.attributes."log-read-url"')"
 ```
 
 テキストファイルが出力されますので内容を確認してください。
 
-最後に Apply をします。プランの結果、`apply`や`dsicard`を選択できます。
+最後に Apply をします。プランの結果、`apply` や `discard` を選択できます。
 
 Apply の場合は、`/runs/:run_id/actions/apply`がエンドポイントです。
 
@@ -579,5 +579,5 @@ $ curl \
 以上で API の利用の章は終了です。TFE API ではワークスペースやプロビジョニングに関する操作の他に、ユーザ管理系のオプレーションなど様々な作業を実施することができ、自動化のプロセスに組み込むことが可能です。
 
 ## 参考リンク
-* [Terraform Cloud API Document](https://www.terraform.io/docs/cloud/api/index.html)
-* [API Drive Run](https://www.terraform.io/docs/cloud/run/api.html)
+* [Terraform Cloud API Docs](https://developer.hashicorp.com/terraform/cloud-docs/api-docs)
+* [API-driven Runs](https://developer.hashicorp.com/terraform/cloud-docs/run/api)
