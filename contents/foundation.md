@@ -1,10 +1,10 @@
-# Terraform基礎ブロック（初学者向け 60〜90分）
+# Terraform 基礎ブロック（初学者向け 60〜90 分）
 
 この章は、後続の Cloud / Enterprise 章に入る前に、Terraform CLI の基本サイクルを短時間で体験するための導入です。
 
 ## この章のゴール
 
-- `init / fmt / validate / plan / apply / destroy` の最小ループを1回完了する
+- `init / fmt / validate / plan / apply / destroy` の最小ループを 1 回完了する
 - `terraform.tfstate` が何を保持するかを理解する
 - `plan` の差分を読んで、`apply` 前に変更内容を判断できる状態になる
 
@@ -26,7 +26,7 @@ terraform {
 resource "null_resource" "example" {}
 ```
 
-## 2. CLIの基本サイクルを実行する
+## 2. CLI の基本サイクルを実行する
 
 ```bash
 terraform init
@@ -57,6 +57,6 @@ terraform state list
 
 ## 完了条件
 
-- 上記6コマンドをエラーなく実行できた
+- 上記 6 コマンドをエラーなく実行できた
 - `terraform.tfstate` の役割を説明できる
 - `plan` の出力から「何が変わるか」を口頭で説明できる
