@@ -1,8 +1,8 @@
 # Private Module Registry を試す
 
-Terraform には DRY(Don't Repeat Yourself)を実現するために共通処理のコードをモジュール化する機能があります。OSS でも利用が可能ですが Git などのレポジトリから取得するか[Public Module Registry](https://registry.terraform.io/)から取得する方法が用意されています。
+Terraform には DRY（Don't Repeat Yourself）を実現するために、共通処理のコードをモジュール化する機能があります。OSS でも利用可能で、Git などのリポジトリまたは [Public Module Registry](https://registry.terraform.io/) から取得できます。
 
-Enterprise 版では Organization ごとにプライベートな Module Registry を持つことが出来ます。これを利用することでチームだけに限定した Module のレジストリを介してソースコードを再利用できます。
+Terraform Cloud の有償プランおよび Terraform Enterprise では、Organization ごとに Private Module Registry を持つことができます。これにより、チーム限定のモジュールを安全に再利用できます。
 
 ## モジュールを作る
 
@@ -29,13 +29,13 @@ $ touch README.md main.tf variables.tf outputs.tf
 
 ```
 | IP address      | デフォルト | 用途 |
-| --------------- |----- | --- | 
-| http_port | 8500 | HTTP APIのインターフェース | 
-| http_port | 8501 | HTTPS APIのインターフェース|  
-| grpc_port | 8502 | gRPC APIのインターフェース |  
-| cluster_rpc_port | 8300 | サーバー間のRPC用 | 
-| lan_serf | 8301 | LAN Serf | 
-| lan_serf | 8302 | WAN Serf | 
+| --------------- |----- | --- |
+| http_port | 8500 | HTTP APIのインターフェース |
+| https_port | 8501 | HTTPS API のインターフェース |
+| grpc_port | 8502 | gRPC APIのインターフェース |
+| cluster_rpc_port | 8300 | サーバー間のRPC用 |
+| lan_serf | 8301 | LAN Serf |
+| wan_serf | 8302 | WAN Serf |
 ```
 
 </details>
@@ -158,12 +158,13 @@ output "lan_serf" {
 これでモジュール作りは終了です。GitHub にコミットしましょう。
 
 ```shell
-$ git init 
+$ git init
 $ git add .
 $ git remote add origin https://github.com/<YOUR_GITHUB_NAME>/terraform-aws-securitygroup.git
 $ git commit -m "first commit"
-$ git tag -a 0.0.1 -m "v 0.0.1" 
-$ git push origin 0.0.1 main
+$ git tag -a 0.0.1 -m "v 0.0.1"
+$ git push -u origin main
+$ git push origin 0.0.1
 ```
 
 TFE の Private Module Registry のいいところはバージョン管理ができ、いつでも複数バージョンから選択できる点です。Git の tag からバージョンを取得しています。
@@ -261,7 +262,8 @@ output "wan_serf" {
 $ git add .
 $ git commit -m "added wan feature"
 $ git tag -a 0.1.0 -m "v 0.1.0"
-$ git push origin 0.1.0 main
+$ git push origin main
+$ git push origin 0.1.0
 ```
 
 TFE の画面に戻り`Modules`をクリックしてモジュールの`Details`を選ぶとバージョンが`0.1.0`にアップしていることがわかるでしょう。

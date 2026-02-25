@@ -1,6 +1,6 @@
 # Terraform Enterprise API を試す
 
-ここまで GUI で操作を行ってきましたが、TFE では API による操作も可能で CI パイプラインによる自動化の運用のワークフローなどに組み込むことが可能です。
+ここまで GUI で操作を行ってきましたが、Terraform Cloud/Enterprise では API による操作も可能で、CI パイプラインなどの自動化ワークフローに組み込めます。
 
 Terraform に関わる操作に加えてユーザ管理など様々な運用作業を API で実施できます。
 
@@ -99,7 +99,7 @@ $ curl \
   https://app.terraform.io/api/v2/organizations/${TF_ORG}/workspaces | jq -r ".data[].attributes.name"
   ```
 
-次にワークスペースを作成します。VCS の章で作成した設定から GitHub の`OAUTH_TOKEN_ID`を取得します。トップ画面の`Setting` -> `VCS Providers` から値をコピーして下さい。
+次にワークスペースを作成します。VCS の章で作成した設定から GitHub の `OAUTH_TOKEN_ID` を取得します。トップ画面の `Settings` -> `VCS Providers` から値をコピーしてください。
 
 <kbd>
   <img src="../assets/tf-api/VCS_provider_settings.png">
@@ -258,20 +258,20 @@ $ curl \
   --header "Content-Type: application/vnd.api+json" \
   --request GET \
   https://app.terraform.io/api/v2/vars\?filter%5Borganization%5D%5Bname%5D\=${TF_ORG}\&filter%5Bworkspace%5D%5Bname%5D\=new-workspace | jq
-``` 
+```
 
-残りの変数をセットしていきますが、現在 TFE API ではデータのリスト型をサポートしていないため一つ一つファイルを定義していく必要があります。
+残りの変数をセットしていきます。API だけでも登録できますが、ここでは手順短縮のため `tfe` Provider を使ってまとめて設定します。
 
 ここでは API とは別手段として、Terraform の `tfe` Provider を使って変数をまとめて設定してみます。`tfe` Provider については [Terraform Registry](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs) を参照してください。
 
-残りの`aws_access_key`, `aws_secret_key`, `ami`, `region`, `confirm_destroy`をまとめてセットしていきます。
+残りの `access_key`, `secret_key`, `ami`, `region`, `CONFIRM_DESTROY` をまとめてセットしていきます。
 
 ```shell
 $ mkdir tfe-provider
 
 $ cat << EOF > tfe-provider/main.tf
 terraform {
-  required_version = "~> 0.12" 
+  required_version = ">= 1.5.0"
 }
 
 provider "tfe" {
@@ -313,7 +313,7 @@ resource "tfe_variable" "region" {
 
 resource "tfe_variable" "confirm_destroy" {
   key          = "CONFIRM_DESTROY"
-  value        = 1
+  value        = "1"
   category     = "env"
   sensitive    = false
   workspace_id = var.workspace_id
@@ -339,7 +339,7 @@ EOF
 $ cd tfe-provider
 $ terraform init
 $ terraform plan
-$ terraform apply -auto-approve 
+$ terraform apply -auto-approve
 $ cd ..
 ```
 
