@@ -79,5 +79,5 @@ General な WebHook と Slack が選択できます。Microsoft Teams や Matter
 ## 完了条件
 
 - 通知チャネル設定が完了している
-- Runイベント通知を受信できる
-- 通知内容からRunへ遷移できる
+- Run イベント通知を受信できる
+- 通知内容から Run へ遷移できる

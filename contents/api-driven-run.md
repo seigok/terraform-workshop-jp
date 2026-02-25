@@ -355,6 +355,6 @@ Terraform cloud 及び Terraform enterprise は[ほぼ全ての機能が API で
 
 ## 完了条件
 
-- Run APIでplanを起動できる
-- 必要に応じてapply/destroyを実行できる
-- Run結果をAPIまたはUIで追跡できる
+- Run API で plan を起動できる
+- 必要に応じて apply/destroy を実行できる
+- Run 結果を API または UI で追跡できる

@@ -357,5 +357,5 @@ diff が取られ、変更点なども直感的に確認できます。各実行
 ## 完了条件
 
 - Terraform/Environment 変数が設定できる
-- sensitive値がマスク表示される
-- 変更がRunに反映される
+- sensitive 値がマスク表示される
+- 変更が Run に反映される

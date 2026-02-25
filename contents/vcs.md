@@ -145,6 +145,6 @@ TFC 上で Workspace を作成します。トップ画面の`+ New Workspace`を
 
 ## 完了条件
 
-- VCS連携（GitHub）が構成済み
-- コミットを契機にRunが起動する
-- Run結果を確認できる
+- VCS 連携（GitHub）が構成済み
+- コミットを契機に Run が起動する
+- Run 結果を確認できる

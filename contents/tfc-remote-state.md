@@ -293,4 +293,4 @@ $ aws ec2 describe-instances --query "Reservations[].Instances[].{InstanceId:Ins
 
 - Terraform Cloud Workspace が作成済み
 - Remote state が利用され、local state に依存しない
-- Run結果をUIで確認できる
+- Run 結果を UI で確認できる
