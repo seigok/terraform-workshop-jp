@@ -353,3 +353,9 @@ diff が取られ、変更点なども直感的に確認できます。各実行
 * [Variables](https://www.terraform.io/docs/cloud/workspaces/variables.html)
 * [TFC API Doc](https://www.terraform.io/docs/cloud/api/index.html)
 * [Terraform Variables と Environ Variables](https://www.terraform.io/docs/cloud/workspaces/variables.html#terraform-variables)
+
+## 完了条件
+
+- Terraform/Environment 変数が設定できる
+- sensitive値がマスク表示される
+- 変更がRunに反映される

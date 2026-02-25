@@ -352,3 +352,9 @@ Terraform cloud 及び Terraform enterprise は[ほぼ全ての機能が API で
   - など
 
 ぜひ Terraform cloud API を活用してハッピーな Provisioning ライフをおくってください！
+
+## 完了条件
+
+- Run APIでplanを起動できる
+- 必要に応じてapply/destroyを実行できる
+- Run結果をAPIまたはUIで追跡できる

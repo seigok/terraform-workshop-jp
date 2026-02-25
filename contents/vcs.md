@@ -142,3 +142,9 @@ TFC 上で Workspace を作成します。トップ画面の`+ New Workspace`を
 ## 参考リンク
 * [VCS Integration](https://www.terraform.io/docs/cloud/vcs/index.html)
 * [VCS Driven Run](https://www.terraform.io/docs/cloud/run/ui.html)
+
+## 完了条件
+
+- VCS連携（GitHub）が構成済み
+- コミットを契機にRunが起動する
+- Run結果を確認できる
