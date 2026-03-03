@@ -75,3 +75,9 @@ General な WebHook と Slack が選択できます。Microsoft Teams や Matter
 
 ## 参考リンク
 * [Run Notifications](https://www.terraform.io/docs/cloud/workspaces/notifications.html)
+
+## 完了条件
+
+- 通知チャネル設定が完了している
+- Run イベント通知を受信できる
+- 通知内容から Run へ遷移できる

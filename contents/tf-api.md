@@ -581,3 +581,9 @@ $ curl \
 ## 参考リンク
 * [Terraform Cloud API Docs](https://developer.hashicorp.com/terraform/cloud-docs/api-docs)
 * [API-driven Runs](https://developer.hashicorp.com/terraform/cloud-docs/run/api)
+
+## 完了条件
+
+- API トークンで認証できる
+- Workspace/Variables/Run API 呼び出しが成功する
+- Run の状態遷移（plan→apply/destroy）を確認できる

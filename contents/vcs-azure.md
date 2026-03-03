@@ -150,3 +150,9 @@ TFC 上で Workspace を作成します。トップ画面の`+ New Workspace`を
 ## 参考リンク
 * [VCS Integration](https://www.terraform.io/docs/cloud/vcs/index.html)
 * [VCS Driven Run](https://www.terraform.io/docs/cloud/run/ui.html)
+
+## 完了条件
+
+- Azure DevOps 連携設定が完了している
+- VCS イベントで Run が起動する
+- 連携先ブランチで動作確認できる

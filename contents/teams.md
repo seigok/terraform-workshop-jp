@@ -110,3 +110,9 @@ Team が設定されたら、Admin 権限のあるユーザーがチームメン
 Terraform Cloud Free Tier では Workspace へのアクセスがあれば誰でも State ファイルへ変更（Apply の実行）が可能ですが、Terraform Cloud の有償プランおよび Enterprise では、さまざまな処理に対してアクセス制限を設定できます。複数のチームメンバーに対し、それぞれ役割に応じた権限を割り当てることで、ルールに応じたワークフローを実現できるのではないでしょうか。
 
 Team とアクセス制限を組み合わせることで、Terraform Cloud/Enterprise で RBAC（Role-Based Access Control）を実現できます。
+
+## 完了条件
+
+- Organization/Workspace の権限設定が完了している
+- admin/developers/managers のアクセス差分を説明できる
+- 期待どおりにアクセス制御される

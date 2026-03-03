@@ -288,3 +288,9 @@ $ aws ec2 describe-instances --query "Reservations[].Instances[].{InstanceId:Ins
 これで Remote Backend の設定は完了です。ここでのエクササイズでは、個人個人で Workspace を作りましたが、これをチームで共有することで State ファイルの共有が実現できます。
 
 ただ、State ファイルの共有が実現できたとしてもまだまだチーム利用としては足りない機能が多々あります。それらを次からの Workshop で見ていきたいと思います。
+
+## 完了条件
+
+- Terraform Cloud Workspace が作成済み
+- Remote state が利用され、local state に依存しない
+- Run 結果を UI で確認できる
